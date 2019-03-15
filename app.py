@@ -12,5 +12,8 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return "Hello Tube"
+@app.route('/Hello')
+def Hello():
+    return "Oh boy"
 if __name__ == "__main__":
     app.run()
