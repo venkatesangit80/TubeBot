@@ -1,1 +1,1 @@
-web: gunicorn uwsgi.ini
+web: gunicorn TubeRest:app
