@@ -9,8 +9,8 @@ Created on Tue Mar 12 22:29:59 2019
 from flask import Flask
 app = Flask(__name__)
 
-@app.route('/home')
+@app.route('/')
 def home():
     return "Hello Tube"
-
-app.run()
+if __name__ == "__main__":
+    app.run()
