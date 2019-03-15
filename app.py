@@ -25,6 +25,6 @@ def GetAllLineStatus():
         modelName = todo_item['modeName']
         statusDescription = todo_item['lineStatuses'][0]['statusSeverityDescription']
         responseValue = " " + responseValue + " " + trainName + " " + modelName + " " + statusDescription
-    return "Done"
+    return responseValue
 if __name__ == "__main__":
     app.run()
