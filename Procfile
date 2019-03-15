@@ -1,1 +1,1 @@
-web: gunicorn TubeRest:app
+web: gunicorn app:app
