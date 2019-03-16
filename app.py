@@ -18,8 +18,6 @@ def Hello():
     return "Oh boy"
 @app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
-    sInput = request.form['input']
-    print(sInput)
     responseValue = []
     responseText = "<Table>"
     response_text = ""
