@@ -33,7 +33,7 @@ def GetAllLineStatus():
         responseText = responseText + "<td>" + todo_item['lineStatuses'][0]['statusSeverityDescription'] + "</td>"
         responseValue.append(trainLineDetails)
         responseText = responseText + "</tr>"
-        response_text = response_text + " Line " + todo_item['name'] + " Status Is " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
+        response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
     responseText = responseText + "</table>"
     reply = {
         "fulfillmentText" : response_text
