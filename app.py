@@ -33,8 +33,11 @@ def GetAllLineStatus():
         responseValue.append(trainLineDetails)
         responseText = responseText + "</tr>"
     responseText = responseText + "</table>"
+    reply = {
+        "fulfillmentText" : responseText
+    }
     #return responseText
-    return jsonify(responseValue)
+    return jsonify(reply)
 
 if __name__ == "__main__":
     app.run()
