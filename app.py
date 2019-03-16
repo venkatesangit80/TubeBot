@@ -19,13 +19,20 @@ def Hello():
 @app.route('/GetAllLineStatus')
 def GetAllLineStatus():
     responseValue = []
+    responseText = "<Table>"
     resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
     for todo_item in resp.json():
+        responseText = responseText + "<tr>"
         trainLineDetails = {}
         trainLineDetails['LineName'] = todo_item['name']
+        responseText = responseText + "<td>" + todo_item['name'] + "</td>"
         trainLineDetails['ModelName'] = todo_item['modeName']
+        responseText = responseText + "<td>" + todo_item['modeName'] + "</td>"
         trainLineDetails['StatusDescription'] = todo_item['lineStatuses'][0]['statusSeverityDescription']
+        responseText = responseText + "<td>" + todo_item['lineStatuses'][0]['statusSeverityDescription'] + "</td>"
         responseValue.append(trainLineDetails)
-    return jsonify(responseValue)
+        responseText = responseText + "</tr>"
+    responseText = responseText + "</table>"
+    return jsonify(responseText)
 if __name__ == "__main__":
     app.run()
