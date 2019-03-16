@@ -33,6 +33,6 @@ def GetAllLineStatus():
         responseValue.append(trainLineDetails)
         responseText = responseText + "</tr>"
     responseText = responseText + "</table>"
-    return jsonify(responseText)
+    return responseText
 if __name__ == "__main__":
     app.run()
