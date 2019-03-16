@@ -16,7 +16,7 @@ def home():
 @app.route('/Hello')
 def Hello():
     return "Oh boy"
-@app.route('/GetAllLineStatus')
+@app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
     responseValue = []
     responseText = "<Table>"
