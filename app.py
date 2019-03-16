@@ -6,7 +6,7 @@ Created on Tue Mar 12 22:29:59 2019
 @author: venkatesansubramanian
 """
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import requests
 app = Flask(__name__)
 
@@ -18,6 +18,9 @@ def Hello():
     return "Oh boy"
 @app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
+    req = request.json(silent=True, force=True)
+    result = req.get("result")
+    sInput = result.get("parameters").get("input")
     responseValue = []
     responseText = "<Table>"
     response_text = ""
