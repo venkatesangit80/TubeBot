@@ -43,8 +43,7 @@ def GetAllLineStatus():
     if response_text == "":
         response_text = "Line " + inputValue + " Not Found"
     reply = {
-        "fulfillmentText" : response_text,
-        "speech" : response_text
+        "fulfillmentText" : response_text
     }
     #reply = {
     #    "fulfillmentText" : str(inputValue)
