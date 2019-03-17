@@ -26,7 +26,7 @@ def GetAllLineStatus():
     response_text = ""
     resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
     for todo_item in resp.json():
-        if todo_item['name'] == inputValue:
+        if todo_item['name'].upper() == inputValue.upper():
             response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
         responseText = responseText + "<tr>"
         trainLineDetails = {}
