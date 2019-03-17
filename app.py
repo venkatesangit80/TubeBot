@@ -24,10 +24,12 @@ def GetAllLineStatus():
     responseValue = []
     responseText = "<Table>"
     response_text = ""
+    allLineNames = ""
     resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
     for todo_item in resp.json():
         if todo_item['name'].upper() == inputValue.upper():
             response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
+        allLineNames = allLineNames + todo_item['name'] + ","
         responseText = responseText + "<tr>"
         trainLineDetails = {}
         trainLineDetails['LineName'] = todo_item['name']
@@ -41,7 +43,7 @@ def GetAllLineStatus():
         #response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
     responseText = responseText + "</table>"
     if response_text == "":
-        response_text = "Line " + inputValue + " Not Found"
+        response_text = "Line " + inputValue + " Not Found. The available lines are : " + allLineNames
     reply = {
         "fulfillmentText" : response_text
     }
