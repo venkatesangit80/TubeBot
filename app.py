@@ -19,6 +19,8 @@ def Hello():
 @app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
     data = request.get_json(silent=True)
+    inputValue = data['queryResult']['parameters']['input']
+    #input
     responseValue = []
     responseText = "<Table>"
     response_text = ""
