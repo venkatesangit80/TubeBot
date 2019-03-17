@@ -38,8 +38,11 @@ def GetAllLineStatus():
         responseText = responseText + "</tr>"
         response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
     responseText = responseText + "</table>"
+    #reply = {
+    #    "fulfillmentText" : response_text
+    #}
     reply = {
-        "fulfillmentText" : response_text
+        "fulfillmentText" : str(inputValue)
     }
     #return responseText
     return jsonify(reply)
