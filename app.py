@@ -29,37 +29,6 @@ def GetAllLineStatus():
     for todo_item in resp.json():
         if todo_item['name'].upper() == inputValue.upper():
             response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription']
-            if "Part" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                statusUrl = "https://api-argon.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                subResp = requests.get(statusUrl)
-                for sub_todo_item in subResp.json():
-                    response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                    for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                        response_text = response_text + singleAffected['commonName'] + ","
-        
-            if "closed" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                statusUrl = "https://api-argon.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                subResp = requests.get(statusUrl)
-                for sub_todo_item in subResp.json():
-                    response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                    for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                        response_text = response_text + singleAffected['commonName'] + ","        
-        
-            if "minor" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                statusUrl = "https://api-argon.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                subResp = requests.get(statusUrl)
-                for sub_todo_item in subResp.json():
-                    response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                    for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                        response_text = response_text + singleAffected['commonName'] + ","      
-
-            if "Reduced" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                statusUrl = "https://api-argon.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                subResp = requests.get(statusUrl)
-                for sub_todo_item in subResp.json():
-                    response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                    for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                        response_text = response_text + singleAffected['commonName'] + ","  
 
         allLineNames = allLineNames + todo_item['name'] + ","
         responseText = responseText + "<tr>"
