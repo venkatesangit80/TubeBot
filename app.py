@@ -38,7 +38,7 @@ def GetAllLineStatus():
                     for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
                         response_text = response_text + singleAffected['commonName'] + ","
         
-            if "closed" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+            if "Closed" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
                 statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                 subResp = requests.get(statusUrl)
                 for sub_todo_item in subResp.json():
@@ -46,7 +46,7 @@ def GetAllLineStatus():
                     for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
                         response_text = response_text + singleAffected['commonName'] + ","        
         
-            if "minor" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+            if "Minor" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
                 statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                 subResp = requests.get(statusUrl)
                 for sub_todo_item in subResp.json():
