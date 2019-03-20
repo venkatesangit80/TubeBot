@@ -21,7 +21,7 @@ def GetAllLineStatus():
     data = request.get_json(silent=True)
     inputValue = data['queryResult']['parameters']['input']
     action = data['queryResult']['action']
-    response_text = action
+    response_text = ""
     inputValue = inputValue.replace("and","&")
     #input
     responseValue = []
