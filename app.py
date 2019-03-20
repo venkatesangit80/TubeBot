@@ -20,6 +20,7 @@ def Hello():
 def GetAllLineStatus():
     data = request.get_json(silent=True)
     inputValue = data['queryResult']['parameters']['input']
+    inputValue = inputValue.replace("and","&")
     #input
     responseValue = []
     responseText = "<Table>"
@@ -98,6 +99,7 @@ def GetAllLineStatus():
 @app.route('/GetAllLineStatusGet')
 def GetAllLineStatusGet():
     inputValue = "London Overground"
+    inputValue = inputValue.replace("and","&")
     #input
     responseValue = []
     responseText = "<Table>"
