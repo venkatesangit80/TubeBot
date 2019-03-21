@@ -185,7 +185,7 @@ def GetCurrentSpot(lineName, stationName):
             ExpectedArrival = singleSpot['expectedArrival']
             PlatformName = singleSpot['platformName']
             returnValue = returnValue + "For " + StationName + " The time of arrival is " + ExpectedArrival + " At Platform " + PlatformName + " The Train is " + CurrentLocation + ","
-    return jsonify(returnValue)
+    return returnValue
     
 
 def GetBikePointDetails(PlaceName):
