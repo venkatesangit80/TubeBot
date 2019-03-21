@@ -92,6 +92,7 @@ def GetAllLineStatus():
     if(action == "GetCurrentSpot"):
         inputValue = inputValue.replace("and","-")
         inputValue = inputValue.replace("&","-")
+        inputValue = inputValue.replace(" ","")
         subInputValue = data['queryResult']['parameters']['subinput']
         response_text = GetCurrentSpot(inputValue,subInputValue)
         if(response_text == ""):
