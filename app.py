@@ -189,7 +189,7 @@ def GetCurrentSpot(lineName, stationName):
             CurrentLocation = singleSpot['currentLocation']
             ExpectedArrival = singleSpot['expectedArrival']
             PlatformName = singleSpot['platformName']
-            returnValue = returnValue + "For " + StationName + " The time of arrival is " + ExpectedArrival + " At Platform " + PlatformName + " The Train is " + CurrentLocation + ","
+            returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + ","
     return returnValue
     
 
