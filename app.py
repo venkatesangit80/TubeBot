@@ -90,8 +90,12 @@ def GetAllLineStatus():
         if response_text == "":
             response_text = "Line " + inputValue + " Not Found. The available lines are : " + allLineNames
     if(action == "GetCurrentSpot"):
+        inputValue = inputValue.replace("and","-")
+        inputValue = inputValue.replace("&","-")
         subInputValue = data['queryResult']['parameters']['subinput']
         response_text = GetCurrentSpot(inputValue,subInputValue)
+        if(response_text == ""):
+            response_text = "No Prediction for the " + subInputValue
     reply = {
         "fulfillmentText" : response_text
     }
