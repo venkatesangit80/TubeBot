@@ -184,12 +184,13 @@ def GetCurrentSpot(lineName, stationName):
     returnValue = ""
     for singleSpot in currentSpotResponse.json():
         fullStationName = singleSpot['stationName']
-        if stationName in fullStationName:
+        if stationName.upper() in fullStationName.upper():
             StationName = singleSpot['stationName']
             CurrentLocation = singleSpot['currentLocation']
             ExpectedArrival = singleSpot['expectedArrival']
             PlatformName = singleSpot['platformName']
-            returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + ","
+            destinationName = singleSpot['destinationName']
+            returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + "," + " Destination is " + destinationName
     return returnValue
     
 
