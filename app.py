@@ -107,10 +107,6 @@ def GetAllLineStatus():
                 }
         return jsonify(reply)
     if(action == "TestRich"):
-        inputValue = inputValue.replace("and","-")
-        inputValue = inputValue.replace("&","-")
-        inputValue = inputValue.replace(" ","")
-        subInputValue = data['queryResult']['parameters']['subinput']
         #response_text = GetCurrentSpot(inputValue,subInputValue)
         #response_text = GetCurrentSpotCard(inputValue,subInputValue)
         response_text = GetCurrentSpotCard()
