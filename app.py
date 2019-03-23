@@ -197,8 +197,8 @@ def GetAllLineStatusGet():
 #@app.route('/GetLocationCard')
 #def GetCurrentSpotCard():
 def GetCurrentSpotCard(lineName, stationName):
-    #lineName = "bakerloo"
-    #stationName = "Waterloo"
+    lineName = "bakerloo"
+    stationName = "Waterloo"
     currentSpotUrl = "https://api.tfl.gov.uk/line/" + lineName + "/arrivals?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
     currentSpotResponse = requests.get(currentSpotUrl)
     returnValue = []
