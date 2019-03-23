@@ -210,16 +210,11 @@ def GetCurrentSpotCard():
             #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
             retData = {}
             retData["title"] = "Will Arrive At " + str(ExpectedArrival)
-            retData["subtitle"] = "Now The Train Is In " + CurrentLocation
-            retData["imageUri"] = "https://img1.sendscraps.com/se/198/002.jpg"
-            retButtons = []
-            retButton = {}
-            retButton["text"] = destinationName
-            retButton["postback"] = "https://img1.sendscraps.com/se/198/002.jpg"
-            retButtons.append(retButton)
-            retData["buttons"] = retButtons
-            returnValueSingle["card"] = retData
-            returnValue.append(returnValueSingle)
+            quickResponses = []
+            quickResponse = StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName
+            quickResponses.append(quickResponse)
+            retData["quickReplies"] = quickResponses
+            returnValue.append(retData)
     return returnValue
     #return jsonify(returnValue)
     
