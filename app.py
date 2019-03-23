@@ -94,7 +94,8 @@ def GetAllLineStatus():
         inputValue = inputValue.replace("&","-")
         inputValue = inputValue.replace(" ","")
         subInputValue = data['queryResult']['parameters']['subinput']
-        response_text = GetCurrentSpot(inputValue,subInputValue)
+        #response_text = GetCurrentSpot(inputValue,subInputValue)
+        response_text = GetCurrentSpotCard(inputValue,subInputValue)
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
     reply = {
@@ -175,6 +176,39 @@ def GetAllLineStatusGet():
     #return responseText
     return jsonify(reply)
 
+#@app.route('/GetLocationCard')
+#def GetCurrentSpotCard():
+def GetCurrentSpotCard(lineName, stationName):
+    lineName = "bakerloo"
+    stationName = "Waterloo"
+    currentSpotUrl = "https://api.tfl.gov.uk/line/" + lineName + "/arrivals?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+    currentSpotResponse = requests.get(currentSpotUrl)
+    returnValue = []
+    for singleSpot in currentSpotResponse.json():
+        returnValueSingle = {}
+        fullStationName = singleSpot['stationName']
+        if stationName.upper() in fullStationName.upper():
+            StationName = singleSpot['stationName']
+            CurrentLocation = singleSpot['currentLocation']
+            ExpectedArrival = singleSpot['expectedArrival']
+            PlatformName = singleSpot['platformName']
+            destinationName = singleSpot['destinationName']
+            #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
+            retData = {}
+            retData["title"] = "Will Arrive At " + str(ExpectedArrival)
+            retData["subtitle"] = "Now The Train Is In " + CurrentLocation
+            retData["imageUri"] = "https://img1.sendscraps.com/se/198/002.jpg"
+            retButtons = []
+            retButton = {}
+            retButton["text"] = destinationName
+            retButton["postback"] = "https://img1.sendscraps.com/se/198/002.jpg"
+            retButtons.append(retButton)
+            retData["buttons"] = retButtons
+            returnValueSingle["card"] = retData
+            returnValue.append(returnValueSingle)
+    return returnValue
+    #return jsonify(returnValue)
+    
 
 def GetCurrentSpot(lineName, stationName):
     #lineName = "waterloo-city"
