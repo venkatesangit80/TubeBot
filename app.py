@@ -107,12 +107,9 @@ def GetAllLineStatus():
                 }
         return jsonify(reply)
     if(action == "TestRich"):
-        inputValue = inputValue.replace("and","-")
-        inputValue = inputValue.replace("&","-")
-        inputValue = inputValue.replace(" ","")
-        subInputValue = data['queryResult']['parameters']['subinput']
         #response_text = GetCurrentSpot(inputValue,subInputValue)
-        response_text = GetCurrentSpotCard(inputValue,subInputValue)
+        #response_text = GetCurrentSpotCard(inputValue,subInputValue)
+        response_text = GetCurrentSpotCard()
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
         reply = {
@@ -194,10 +191,10 @@ def GetAllLineStatusGet():
     return jsonify(reply)
 
 #@app.route('/GetLocationCard')
-#def GetCurrentSpotCard():
-def GetCurrentSpotCard(lineName, stationName):
-    #lineName = "bakerloo"
-    #stationName = "Waterloo"
+def GetCurrentSpotCard():
+#def GetCurrentSpotCard(lineName, stationName):
+    lineName = "bakerloo"
+    stationName = "Waterloo"
     currentSpotUrl = "https://api.tfl.gov.uk/line/" + lineName + "/arrivals?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
     currentSpotResponse = requests.get(currentSpotUrl)
     returnValue = []
