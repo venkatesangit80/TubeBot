@@ -89,6 +89,10 @@ def GetAllLineStatus():
         responseText = responseText + "</table>"
         if response_text == "":
             response_text = "Line " + inputValue + " Not Found. The available lines are : " + allLineNames
+        reply = {
+                "fulfillmentText" : response_text
+                }
+        return jsonify(reply)
     if(action == "GetCurrentSpot"):
         inputValue = inputValue.replace("and","-")
         inputValue = inputValue.replace("&","-")
@@ -98,11 +102,11 @@ def GetAllLineStatus():
         response_text = GetCurrentSpotCard(inputValue,subInputValue)
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
-    reply = {
-        "fulfillmentText" : response_text
-    }
-        
-    return jsonify(reply)
+        reply = {
+                "fulfillmentMessages" : response_text
+                }
+        return jsonify(reply)
+    
 
 @app.route('/GetAllLineStatusGet')
 def GetAllLineStatusGet():
