@@ -226,11 +226,11 @@ def GetCurrentSpotCard(lineName,stationName):
             retData["buttons"] = retButtons
             returnValueSingle["card"] = retData
             returnValue.append(returnValueSingle)
-    facebookReturnValue.append(returnValue)
-    platformObj = {}
-    platformObj['platform'] = "FACEBOOK"
-    facebookReturnValue.append(platformObj)
-    return facebookReturnValue
+    #facebookReturnValue.append(returnValue)
+    #platformObj = {}
+    #platformObj['platform'] = "FACEBOOK"
+    #facebookReturnValue.append(platformObj)
+    return returnValue
     #return jsonify(returnValue)
     
 
