@@ -225,6 +225,9 @@ def GetCurrentSpotCard(lineName,stationName):
             retData["buttons"] = retButtons
             returnValueSingle["card"] = retData
             returnValue.append(returnValueSingle)
+    platformObj = {}
+    platformObj['platform'] = "FACEBOOK"
+    returnValue.append(platformObj)
     return returnValue
     #return jsonify(returnValue)
     
