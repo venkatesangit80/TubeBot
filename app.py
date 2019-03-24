@@ -109,7 +109,11 @@ def GetAllLineStatus():
     if(action == "TestRich"):
         #response_text = GetCurrentSpot(inputValue,subInputValue)
         #response_text = GetCurrentSpotCard(inputValue,subInputValue)
-        response_text = GetCurrentSpotCard("bakerloo","Waterloo")
+        inputValue = inputValue.replace("and","-")
+        inputValue = inputValue.replace("&","-")
+        inputValue = inputValue.replace(" ","")
+        #response_text = GetCurrentSpotCard("bakerloo","Waterloo")
+        response_text = GetCurrentSpotCard(inputValue,"Waterloo")
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
         reply = {
