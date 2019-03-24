@@ -112,6 +112,7 @@ def GetAllLineStatus():
         inputValue = inputValue.replace("and","-")
         inputValue = inputValue.replace("&","-")
         inputValue = inputValue.replace(" ","")
+        subInputValue = data['queryResult']['parameters']['subinput']
         #response_text = GetCurrentSpotCard("bakerloo","Waterloo")
         response_text = GetCurrentSpotCard(inputValue,"Waterloo")
         if(response_text == ""):
