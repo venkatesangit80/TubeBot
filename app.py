@@ -98,12 +98,12 @@ def GetAllLineStatus():
         inputValue = inputValue.replace("&","-")
         inputValue = inputValue.replace(" ","")
         subInputValue = data['queryResult']['parameters']['subinput']
-        response_text = GetCurrentSpot(inputValue,subInputValue)
-        #response_text = GetCurrentSpotCard(inputValue,subInputValue)
+        #response_text = GetCurrentSpot(inputValue,subInputValue)
+        response_text = GetCurrentSpotCard(inputValue,subInputValue)
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
         reply = {
-                "fulfillmentText" : response_text
+                "fulfillmentMessages" : response_text
                 }
         return jsonify(reply)
     if(action == "TestRich"):
