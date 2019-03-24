@@ -215,7 +215,7 @@ def GetCurrentSpotCard(lineName,stationName):
             #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
             retData = {}
             retData["title"] = "Will Arrive At " + str(ExpectedArrival)
-            retData["subtitle"] = "Now The Train Is In " + CurrentLocation + " & the destination is " + destinationName
+            retData["subtitle"] = "Now in " + CurrentLocation + ", destination: " + destinationName
             retData["imageUri"] = "https://bryk.com.pl/wp-content/uploads/2018/5611472-simple-images.png"
             retButtons = []
             retButton = {}
