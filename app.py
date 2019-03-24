@@ -204,6 +204,7 @@ def GetCurrentSpotCard(lineName,stationName):
     currentSpotResponse = requests.get(currentSpotUrl)
     returnValue = []
     facebookReturnValue = []
+    FulfilmentResponse = []
     for singleSpot in currentSpotResponse.json():
         returnValueSingle = {}
         fullStationName = singleSpot['stationName']
@@ -214,44 +215,14 @@ def GetCurrentSpotCard(lineName,stationName):
             PlatformName = singleSpot['platformName']
             destinationName = singleSpot['destinationName']
             #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
+            FullResponse = {}
             retData = {}
-            retData["title"] = "Will Arrive At " + str(ExpectedArrival)
-            retData["subtitle"] = "Now in " + CurrentLocation + ", destination: " + destinationName
-            retData["imageUri"] = "https://bryk.com.pl/wp-content/uploads/2018/5611472-simple-images.png"
-            retButtons = []
-            retButton = {}
-            retButton["text"] = "Happy Journey"
-            retButton["postback"] = "https://img1.sendscraps.com/se/198/002.jpg"
-            retButtons.append(retButton)
-            retData["buttons"] = retButtons
-            returnValueSingle["card"] = retData
-            returnValue.append(returnValueSingle)
-    #facebookReturnValue.append(returnValue)
-    #platformObj = {}
-    #platformObj['platform'] = "FACEBOOK"
-    #facebookReturnValue.append(platformObj)
-    
-    FullResponse = {}
-    quickResponse = {}
-    quickResponse["title"] = "Test"
-    quickReplies = []
-    quickReplies.append("Test")
-    quickResponse["quickReplies"] = quickReplies
-    FullResponse["quickReplies"] = quickResponse
-    
-    FullResponse1 = {}
-    quickResponse1 = {}
-    quickResponse1["title"] = "Test1"
-    quickReplies1 = []
-    quickReplies1.append("Test1")
-    quickResponse1["quickReplies"] = quickReplies1
-    FullResponse1["quickReplies"] = quickResponse1
-    
-    FulfilmentResponse = []
-    FulfilmentResponse.append(FullResponse)
-    FulfilmentResponse.append(FullResponse1)
-    
-    
+            retData["title"] = "Will Arrive At " + str(ExpectedArrival) + " Now in " + CurrentLocation + ", destination: " + destinationName
+            quickReplies = []
+            quickReplies.append("Test")
+            retData["quickReplies"] = quickReplies
+            FullResponse["quickReplies"] = retData
+            FulfilmentResponse.append(FullResponse)    
     return FulfilmentResponse
     #return jsonify(returnValue)
     
