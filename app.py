@@ -238,8 +238,18 @@ def GetCurrentSpotCard(lineName,stationName):
     quickReplies.append("Test")
     quickResponse["quickReplies"] = quickReplies
     FullResponse["quickReplies"] = quickResponse
+    
+    FullResponse1 = {}
+    quickResponse1 = {}
+    quickResponse1["title"] = "Test"
+    quickReplies1 = []
+    quickReplies1.append("Test")
+    quickResponse1["quickReplies"] = quickReplies1
+    FullResponse1["quickReplies"] = quickResponse1
+    
     FulfilmentResponse = []
     FulfilmentResponse.append(FullResponse)
+    FulfilmentResponse.append(FullResponse1)
     
     
     return FulfilmentResponse
