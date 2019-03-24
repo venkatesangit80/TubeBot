@@ -215,11 +215,11 @@ def GetCurrentSpotCard(lineName,stationName):
             #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
             retData = {}
             retData["title"] = "Will Arrive At " + str(ExpectedArrival)
-            retData["subtitle"] = "Now The Train Is In " + CurrentLocation
+            retData["subtitle"] = "Now The Train Is In " + CurrentLocation + " & the destination is " + destinationName
             retData["imageUri"] = "https://bryk.com.pl/wp-content/uploads/2018/5611472-simple-images.png"
             retButtons = []
             retButton = {}
-            retButton["text"] = destinationName
+            retButton["text"] = "Happy Journey"
             retButton["postback"] = "https://img1.sendscraps.com/se/198/002.jpg"
             retButtons.append(retButton)
             retData["buttons"] = retButtons
