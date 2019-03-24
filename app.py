@@ -203,6 +203,7 @@ def GetCurrentSpotCard(lineName,stationName):
     currentSpotUrl = "https://api.tfl.gov.uk/line/" + lineName + "/arrivals?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
     currentSpotResponse = requests.get(currentSpotUrl)
     returnValue = []
+    facebookReturnValue = []
     for singleSpot in currentSpotResponse.json():
         returnValueSingle = {}
         fullStationName = singleSpot['stationName']
@@ -225,10 +226,11 @@ def GetCurrentSpotCard(lineName,stationName):
             retData["buttons"] = retButtons
             returnValueSingle["card"] = retData
             returnValue.append(returnValueSingle)
+    facebookReturnValue.append(returnValue)
     platformObj = {}
     platformObj['platform'] = "FACEBOOK"
-    returnValue.append(platformObj)
-    return returnValue
+    facebookReturnValue.append(platformObj)
+    return facebookReturnValue
     #return jsonify(returnValue)
     
 
