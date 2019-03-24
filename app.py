@@ -231,14 +231,16 @@ def GetCurrentSpotCard(lineName,stationName):
     #platformObj['platform'] = "FACEBOOK"
     #facebookReturnValue.append(platformObj)
     
+    FullResponse = {}
     quickResponse = {}
     quickResponse["title"] = "Test"
     quickReplies = []
     quickReplies.append("Test")
     quickResponse["quickReplies"] = quickReplies
+    FullResponse["quickReplies"] = quickResponse
     
     
-    return quickResponse
+    return FullResponse
     #return jsonify(returnValue)
     
 
