@@ -236,7 +236,7 @@ def GetCurrentSpotCard(lineName,stationName):
     quickResponse["title"] = "Test"
     quickReplies = []
     quickReplies.append("Test")
-    #quickResponse["quickReplies"] = quickReplies
+    quickResponse["quickReplies"] = quickReplies
     FullResponse["quickReplies"] = quickResponse
     
     FullResponse1 = {}
@@ -244,7 +244,7 @@ def GetCurrentSpotCard(lineName,stationName):
     quickResponse1["title"] = "Test"
     quickReplies1 = []
     quickReplies1.append("Test")
-    #quickResponse1["quickReplies"] = quickReplies1
+    quickResponse1["quickReplies"] = quickReplies1
     FullResponse1["quickReplies"] = quickResponse1
     
     FulfilmentResponse = []
