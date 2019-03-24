@@ -217,7 +217,7 @@ def GetCurrentSpotCard(lineName,stationName):
             #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
             FullResponse = {}
             retData = {}
-            retData["title"] = "Will Arrive At " + str(ExpectedArrival) + " Now in " + CurrentLocation + ", destination: " + destinationName
+            retData["title"] = "Expected to Arrive At " + str(ExpectedArrival) + " Currently " + CurrentLocation + ", destination: " + destinationName
             quickReplies = []
             quickReplies.append("Happy Journey")
             retData["quickReplies"] = quickReplies
