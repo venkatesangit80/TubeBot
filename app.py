@@ -113,7 +113,7 @@ def GetAllLineStatus():
         inputValue = inputValue.replace("&","-")
         inputValue = inputValue.replace(" ","")
         subInputValue = data['queryResult']['parameters']['subinput']
-        response_text_text = GetCurrentSpotCard(inputValue,subInputValue)
+        response_text_text = GetCurrentSpot(inputValue,subInputValue)
         response_text = GetCurrentSpotCard(inputValue,subInputValue)
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
