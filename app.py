@@ -98,7 +98,7 @@ def GetAllLineStatus():
         inputValue = inputValue.replace("&","-")
         inputValue = inputValue.replace(" ","")
         subInputValue = data['queryResult']['parameters']['subinput']
-        response_text_test = GetCurrentSpot(inputValue,subInputValue)
+        response_text_data = GetCurrentSpot(inputValue,subInputValue)
         response_text = GetCurrentSpotCard(inputValue,subInputValue)
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
@@ -221,7 +221,7 @@ def GetCurrentSpotCard(lineName,stationName):
             #returnValue = returnValue + StationName + " - " + ExpectedArrival + " At Platform " + PlatformName + " Currently " + CurrentLocation + " Destination is " + destinationName + " ----------------------------- "
             FullResponse = {}
             retData = {}
-            retData["title"] = "Expected to Arrive At " + str(ExpectedArrival) + " Currently " + CurrentLocation + ", destination: " + destinationName
+            retData["title"] = "Expected to Arrive At " + str(ExpectedArrival) + " To Station " + StationName + " Currently " + CurrentLocation + ", destination: " + destinationName
             quickReplies = []
             quickReplies.append("Happy Journey")
             retData["quickReplies"] = quickReplies
