@@ -139,6 +139,13 @@ def GetAllLineStatus():
                 "fulfillmentText" : latestNews
                 }
         return jsonify(reply)    
+    if(action == "indianews"):
+        latestNews = IndiaLatestNews()
+        #latestNews = "Test"
+        reply = {
+                "fulfillmentText" : latestNews
+                }
+        return jsonify(reply)    
 
 @app.route('/GetAllLineStatusGet')
 def GetAllLineStatusGet():
@@ -287,6 +294,14 @@ def ABCLatestNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=abc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
     newsTitles = ""
+    for singleNews in newsFeedResponse.json()['articles']:
+        newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
+    return newsTitles
+
+def IndiaLatestNews():
+    newsFeed = "https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apiKey=8815e48b03a3457983dd976bd251aafe"
+    newsFeedResponse = requests.get(newsFeed)
+    newTitles = ""
     for singleNews in newsFeedResponse.json()['articles']:
         newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
     return newsTitles
