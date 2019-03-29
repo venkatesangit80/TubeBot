@@ -240,7 +240,7 @@ def GetCurrentSpotCard(lineName,stationName):
             quickReplies.append("Happy Journey")
             retData["quickReplies"] = quickReplies
             FullResponse["quickReplies"] = retData
-            if lineNo >= 4:
+            if lineNo <= 4:
                 FulfilmentResponse.append(FullResponse)
             lineNo = lineNo + 1
     return FulfilmentResponse
