@@ -284,7 +284,7 @@ def LatestNews():
     return newsTitles
 
 def ABCLatestNews():
-    newsFeed = "https://newsapi.org/v2/everything?sources=abc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
+    newsFeed = "https://newsapi.org/v2/top-headlines?sources=abc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
     newsTitles = ""
     for singleNews in newsFeedResponse.json()['articles']:
