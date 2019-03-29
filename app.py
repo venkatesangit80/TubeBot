@@ -132,7 +132,13 @@ def GetAllLineStatus():
                 "fulfillmentText" : latestNews
                 }
         return jsonify(reply)
-    
+    if(action == "abcnews"):
+        latestNews = ABCLatestNews()
+        #latestNews = "Test"
+        reply = {
+                "fulfillmentText" : latestNews
+                }
+        return jsonify(reply)    
 
 @app.route('/GetAllLineStatusGet')
 def GetAllLineStatusGet():
@@ -271,6 +277,14 @@ def GetBikePointDetails(PlaceName):
 #@app.route('/News')
 def LatestNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
+    newsFeedResponse = requests.get(newsFeed)
+    newsTitles = ""
+    for singleNews in newsFeedResponse.json()['articles']:
+        newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
+    return newsTitles
+
+def ABCLatestNews():
+    newsFeed = "https://newsapi.org/v2/everything?sources=abc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
     newsTitles = ""
     for singleNews in newsFeedResponse.json()['articles']:
