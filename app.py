@@ -126,8 +126,8 @@ def GetAllLineStatus():
                 }
         return jsonify(reply)
     if(action == "news"):
-        #latestNews = LatestNews()
-        latestNews = "Test"
+        latestNews = LatestNews()
+        #latestNews = "Test"
         reply = {
                 "fulfillmentText" : latestNews
                 }
