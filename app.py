@@ -209,6 +209,7 @@ def GetCurrentSpotCard(lineName,stationName):
     returnValue = []
     facebookReturnValue = []
     FulfilmentResponse = []
+    lineNo = 0
     for singleSpot in currentSpotResponse.json():
         returnValueSingle = {}
         fullStationName = singleSpot['stationName']
@@ -226,7 +227,9 @@ def GetCurrentSpotCard(lineName,stationName):
             quickReplies.append("Happy Journey")
             retData["quickReplies"] = quickReplies
             FullResponse["quickReplies"] = retData
-            FulfilmentResponse.append(FullResponse)    
+            if lineNo == 0:
+                FulfilmentResponse.append(FullResponse)
+            lineNo = lineNo + 1
     return FulfilmentResponse
     #return jsonify(returnValue)
     
