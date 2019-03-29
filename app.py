@@ -103,7 +103,7 @@ def GetAllLineStatus():
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
         reply = {
-                "fulfillmentText" : response_text_test
+                "fulfillmentMessages" : response_text
                 }
         return jsonify(reply)
     if(action == "TestRich"):
