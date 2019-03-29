@@ -117,9 +117,12 @@ def GetAllLineStatus():
         response_text = GetCurrentSpotCard(inputValue,subInputValue)
         if(response_text == ""):
             response_text = "No Prediction for the " + subInputValue
+        #reply = {
+        #        "fulfillmentText" : response_text_text,
+        #        "fulfillmentMessages" : response_text
+        #        }
         reply = {
-                "fulfillmentText" : response_text_text,
-                "fulfillmentMessages" : response_text
+                "fulfillmentText" : response_text_text
                 }
         return jsonify(reply)
     
