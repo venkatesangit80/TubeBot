@@ -267,7 +267,7 @@ def GetBikePointDetails(PlaceName):
     reply = { "fulfillmentText" : bikePoints }
     return jsonify(reply)
 
-@app.route('/News')
+#@app.route('/News')
 def LatestNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
