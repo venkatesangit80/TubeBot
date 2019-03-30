@@ -298,10 +298,11 @@ def ABCLatestNews():
         newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
     return newsTitles
 
+@app.route('/News')
 def IndiaLatestNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
-    newTitles = ""
+    newsTitles = ""
     for singleNews in newsFeedResponse.json()['articles']:
         newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
     return newsTitles
