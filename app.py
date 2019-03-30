@@ -146,6 +146,13 @@ def GetAllLineStatus():
                 "fulfillmentText" : latestNews
                 }
         return jsonify(reply)    
+    if(action == "hindunews"):
+        latestNews = HinduNews()
+        #latestNews = "Test"
+        reply = {
+                "fulfillmentText" : latestNews
+                }
+        return jsonify(reply)    
 
 @app.route('/GetAllLineStatusGet')
 def GetAllLineStatusGet():
@@ -281,7 +288,7 @@ def GetBikePointDetails(PlaceName):
     reply = { "fulfillmentText" : bikePoints }
     return jsonify(reply)
 
-#@app.route('/News')
+@app.route('/UkNews')
 def LatestNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
@@ -298,7 +305,7 @@ def ABCLatestNews():
         newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
     return newsTitles
 
-@app.route('/News')
+@app.route('/IndiaNews')
 def IndiaLatestNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
@@ -306,6 +313,15 @@ def IndiaLatestNews():
     for singleNews in newsFeedResponse.json()['articles']:
         newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
     return newsTitles
+
+@app.route('/HinduNews')
+def HinduNews():
+    newsFeed = "https://newsapi.org/v2/top-headlines?sources=the-hindu&apiKey=8815e48b03a3457983dd976bd251aafe"
+    newsFeedResponse = requests.get(newsFeed)
+    newsTitles = ""
+    for singleNews in newsFeedResponse.json()['articles']:
+        newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
+    return newsTitles    
 
 if __name__ == "__main__":
     app.run()
