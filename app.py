@@ -153,6 +153,13 @@ def GetAllLineStatus():
                 "fulfillmentText" : latestNews
                 }
         return jsonify(reply)
+    if(action == "TechNews"):
+        latestNews = TechNews()
+        #latestNews = "Test"
+        reply = {
+                "fulfillmentText" : latestNews
+                }
+        return jsonify(reply)
     if(action == "hindunews"):
         latestNews = HinduNews()
         #latestNews = "Test"
@@ -325,6 +332,15 @@ def IndiaLatestNews():
 @app.route('/CricketNews')
 def CrickNews():
     newsFeed = "https://newsapi.org/v2/top-headlines?sources=espn-cric-info&apiKey=8815e48b03a3457983dd976bd251aafe"
+    newsFeedResponse = requests.get(newsFeed)
+    newsTitles = ""
+    for singleNews in newsFeedResponse.json()['articles']:
+        newsTitles = newsTitles + str(singleNews['title']) + " <<<<< " + str(singleNews["description"]) + " >>>>> "
+    return newsTitles
+
+@app.route('/TechNews')
+def TechNews():
+    newsFeed = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=8815e48b03a3457983dd976bd251aafe"
     newsFeedResponse = requests.get(newsFeed)
     newsTitles = ""
     for singleNews in newsFeedResponse.json()['articles']:
