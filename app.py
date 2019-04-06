@@ -160,6 +160,12 @@ def GetAllLineStatus():
                 "fulfillmentText" : latestNews
                 }
         return jsonify(reply)
+    if(action == "Dictionary"):
+        wordMeaning = DictionaryInformation(inputValue)
+        reply = {
+                "fulfillmentText" : wordMeaning
+                }
+        return jsonify(reply)
     if(action == "hindunews"):
         latestNews = HinduNews()
         #latestNews = "Test"
@@ -337,6 +343,24 @@ def CrickNews():
     for singleNews in newsFeedResponse.json()['articles']:
         newsTitles = newsTitles + str(singleNews['title']) + " <<<<< " + str(singleNews["description"]) + " >>>>> "
     return newsTitles
+
+@app.route('/dictionary/<WordToUse>')
+def DictionaryInformation(WordToUse):
+    url = "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/" + WordToUse
+    headers = {
+        "app_id" : "b8a7506b",
+        "app_key" : "8445b051a6fd19d030a97ca6e48dfa40"
+    }
+    response = requests.get(url, headers=headers)
+    returnValue = ""
+    for singleResponse in response.json()['results']:
+        print(singleResponse['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0])
+        print("----------------------")
+        print(singleResponse['lexicalEntries'][0]['entries'][0]['senses'][0]['examples'][0]['text'])
+        returnValue = returnValue + " <<< Defenition : " + singleResponse['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
+        returnValue = returnValue + " Usage : " + singleResponse['lexicalEntries'][0]['entries'][0]['senses'][0]['examples'][0]['text'] + ">>>"
+    return returnValue
+        
 
 @app.route('/TechNews')
 def TechNews():
