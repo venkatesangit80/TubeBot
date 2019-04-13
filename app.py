@@ -18,161 +18,166 @@ def Hello():
     return "Oh boy"
 @app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
-    data = request.get_json(silent=True)
-    inputValue = data['queryResult']['parameters']['input']
-    action = data['queryResult']['action']
-    response_text = ""
-    if(action == "AllTubeLineStatus"):
-        inputValue = inputValue.replace("and","&")
-        #input
-        responseValue = []
-        responseText = "<Table>"
-        allLineNames = ""
-        resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
-        for todo_item in resp.json():
-            if todo_item['name'].upper() == inputValue.upper():
-                response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription']
-    
-                if "Part" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                    statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                    subResp = requests.get(statusUrl)
-                    for sub_todo_item in subResp.json():
-                        response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                        for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                            response_text = response_text + singleAffected['commonName'] + ","
-            
-                if "Closed" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                    statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                    subResp = requests.get(statusUrl)
-                    for sub_todo_item in subResp.json():
-                        response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                        for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                            response_text = response_text + singleAffected['commonName'] + ","        
-            
-                if "Minor" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                    statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                    subResp = requests.get(statusUrl)
-                    for sub_todo_item in subResp.json():
-                        response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                        for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                            response_text = response_text + singleAffected['commonName'] + ","      
-    
-            
-                if "Severe" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                    statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                    subResp = requests.get(statusUrl)
-                    for sub_todo_item in subResp.json():
-                        response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                        for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                            response_text = response_text + singleAffected['commonName'] + ","   
-    
-                if "Reduced" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                    statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
-                    subResp = requests.get(statusUrl)
-                    for sub_todo_item in subResp.json():
-                        response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
-                        for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
-                            response_text = response_text + singleAffected['commonName'] + ","      
-    
-            allLineNames = allLineNames + todo_item['name'] + ","
-            responseText = responseText + "<tr>"
-            trainLineDetails = {}
-            trainLineDetails['LineName'] = todo_item['name']
-            responseText = responseText + "<td>" + todo_item['name'] + "</td>"
-            trainLineDetails['ModelName'] = todo_item['modeName']
-            responseText = responseText + "<td>" + todo_item['modeName'] + "</td>"
-            trainLineDetails['StatusDescription'] = todo_item['lineStatuses'][0]['statusSeverityDescription']
-            responseText = responseText + "<td>" + todo_item['lineStatuses'][0]['statusSeverityDescription'] + "</td>"
-            responseValue.append(trainLineDetails)
-            responseText = responseText + "</tr>"
-            #response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
-        responseText = responseText + "</table>"
-        if response_text == "":
-            response_text = "Line " + inputValue + " Not Found. The available lines are : " + allLineNames
+    try:
+        data = request.get_json(silent=True)
+        inputValue = data['queryResult']['parameters']['input']
+        action = data['queryResult']['action']
+        response_text = ""
+        if(action == "AllTubeLineStatus"):
+            inputValue = inputValue.replace("and","&")
+            #input
+            responseValue = []
+            responseText = "<Table>"
+            allLineNames = ""
+            resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
+            for todo_item in resp.json():
+                if todo_item['name'].upper() == inputValue.upper():
+                    response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription']
+        
+                    if "Part" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        subResp = requests.get(statusUrl)
+                        for sub_todo_item in subResp.json():
+                            response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
+                            for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
+                                response_text = response_text + singleAffected['commonName'] + ","
+                
+                    if "Closed" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        subResp = requests.get(statusUrl)
+                        for sub_todo_item in subResp.json():
+                            response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
+                            for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
+                                response_text = response_text + singleAffected['commonName'] + ","        
+                
+                    if "Minor" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        subResp = requests.get(statusUrl)
+                        for sub_todo_item in subResp.json():
+                            response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
+                            for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
+                                response_text = response_text + singleAffected['commonName'] + ","      
+        
+                
+                    if "Severe" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        subResp = requests.get(statusUrl)
+                        for sub_todo_item in subResp.json():
+                            response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
+                            for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
+                                response_text = response_text + singleAffected['commonName'] + ","   
+        
+                    if "Reduced" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        subResp = requests.get(statusUrl)
+                        for sub_todo_item in subResp.json():
+                            response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
+                            for singleAffected in sub_todo_item['lineStatuses'][0]['disruption']['affectedStops']:
+                                response_text = response_text + singleAffected['commonName'] + ","      
+        
+                allLineNames = allLineNames + todo_item['name'] + ","
+                responseText = responseText + "<tr>"
+                trainLineDetails = {}
+                trainLineDetails['LineName'] = todo_item['name']
+                responseText = responseText + "<td>" + todo_item['name'] + "</td>"
+                trainLineDetails['ModelName'] = todo_item['modeName']
+                responseText = responseText + "<td>" + todo_item['modeName'] + "</td>"
+                trainLineDetails['StatusDescription'] = todo_item['lineStatuses'][0]['statusSeverityDescription']
+                responseText = responseText + "<td>" + todo_item['lineStatuses'][0]['statusSeverityDescription'] + "</td>"
+                responseValue.append(trainLineDetails)
+                responseText = responseText + "</tr>"
+                #response_text = response_text + " Line " + todo_item['name'] + " Status Is - " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " , "
+            responseText = responseText + "</table>"
+            if response_text == "":
+                response_text = "Line " + inputValue + " Not Found. The available lines are : " + allLineNames
+            reply = {
+                    "fulfillmentText" : response_text
+                    }
+            return jsonify(reply)
+        if(action == "GetCurrentSpot"):
+            inputValue = inputValue.replace("and","-")
+            inputValue = inputValue.replace("&","-")
+            inputValue = inputValue.replace(" ","")
+            subInputValue = data['queryResult']['parameters']['subinput']
+            response_text_data = GetCurrentSpot(inputValue,subInputValue)
+            response_text = GetCurrentSpotCard(inputValue,subInputValue)
+            if(response_text == ""):
+                response_text = "No Prediction for the " + subInputValue
+            reply = {
+                    "fulfillmentMessages" : response_text
+                    }
+            return jsonify(reply)
+        if(action == "TestRich"):
+            #response_text = GetCurrentSpot(inputValue,subInputValue)
+            #response_text = GetCurrentSpotCard(inputValue,subInputValue)
+            inputValue = inputValue.replace("and","-")
+            inputValue = inputValue.replace("&","-")
+            inputValue = inputValue.replace(" ","")
+            subInputValue = data['queryResult']['parameters']['subinput']
+            response_text_text = GetCurrentSpot(inputValue,subInputValue)
+            response_text = GetCurrentSpotCard(inputValue,subInputValue)
+            if(response_text == ""):
+                response_text = "No Prediction for the " + subInputValue
+            #reply = {
+            #        "fulfillmentText" : response_text_text,
+            #        "fulfillmentMessages" : response_text
+            #        }
+            reply = {
+                    "fulfillmentText" : response_text_text
+                    }
+            return jsonify(reply)
+        if(action == "news"):
+            latestNews = LatestNews()
+            #latestNews = "Test"
+            reply = {
+                    "fulfillmentText" : latestNews
+                    }
+            return jsonify(reply)
+        if(action == "abcnews"):
+            latestNews = ABCLatestNews()
+            #latestNews = "Test"
+            reply = {
+                    "fulfillmentText" : latestNews
+                    }
+            return jsonify(reply)    
+        if(action == "indianews"):
+            latestNews = IndiaLatestNews()
+            #latestNews = "Test"
+            reply = {
+                    "fulfillmentText" : latestNews
+                    }
+            return jsonify(reply)   
+        if(action == "CrickNews"):
+            latestNews = CrickNews()
+            #latestNews = "Test"
+            reply = {
+                    "fulfillmentText" : latestNews
+                    }
+            return jsonify(reply)
+        if(action == "TechNews"):
+            latestNews = TechNews()
+            #latestNews = "Test"
+            reply = {
+                    "fulfillmentText" : latestNews
+                    }
+            return jsonify(reply)
+        if(action == "Dictionary"):
+            wordMeaning = DictionaryInformation(inputValue)
+            reply = {
+                    "fulfillmentText" : wordMeaning
+                    }
+            return jsonify(reply)
+        if(action == "hindunews"):
+            latestNews = HinduNews()
+            #latestNews = "Test"
+            reply = {
+                    "fulfillmentText" : latestNews
+                    }
+            return jsonify(reply)    
+    except ValueError:
         reply = {
-                "fulfillmentText" : response_text
+                "fulfillmentText" : "Sorry not able to process your request"
                 }
-        return jsonify(reply)
-    if(action == "GetCurrentSpot"):
-        inputValue = inputValue.replace("and","-")
-        inputValue = inputValue.replace("&","-")
-        inputValue = inputValue.replace(" ","")
-        subInputValue = data['queryResult']['parameters']['subinput']
-        response_text_data = GetCurrentSpot(inputValue,subInputValue)
-        response_text = GetCurrentSpotCard(inputValue,subInputValue)
-        if(response_text == ""):
-            response_text = "No Prediction for the " + subInputValue
-        reply = {
-                "fulfillmentMessages" : response_text
-                }
-        return jsonify(reply)
-    if(action == "TestRich"):
-        #response_text = GetCurrentSpot(inputValue,subInputValue)
-        #response_text = GetCurrentSpotCard(inputValue,subInputValue)
-        inputValue = inputValue.replace("and","-")
-        inputValue = inputValue.replace("&","-")
-        inputValue = inputValue.replace(" ","")
-        subInputValue = data['queryResult']['parameters']['subinput']
-        response_text_text = GetCurrentSpot(inputValue,subInputValue)
-        response_text = GetCurrentSpotCard(inputValue,subInputValue)
-        if(response_text == ""):
-            response_text = "No Prediction for the " + subInputValue
-        #reply = {
-        #        "fulfillmentText" : response_text_text,
-        #        "fulfillmentMessages" : response_text
-        #        }
-        reply = {
-                "fulfillmentText" : response_text_text
-                }
-        return jsonify(reply)
-    if(action == "news"):
-        latestNews = LatestNews()
-        #latestNews = "Test"
-        reply = {
-                "fulfillmentText" : latestNews
-                }
-        return jsonify(reply)
-    if(action == "abcnews"):
-        latestNews = ABCLatestNews()
-        #latestNews = "Test"
-        reply = {
-                "fulfillmentText" : latestNews
-                }
-        return jsonify(reply)    
-    if(action == "indianews"):
-        latestNews = IndiaLatestNews()
-        #latestNews = "Test"
-        reply = {
-                "fulfillmentText" : latestNews
-                }
-        return jsonify(reply)   
-    if(action == "CrickNews"):
-        latestNews = CrickNews()
-        #latestNews = "Test"
-        reply = {
-                "fulfillmentText" : latestNews
-                }
-        return jsonify(reply)
-    if(action == "TechNews"):
-        latestNews = TechNews()
-        #latestNews = "Test"
-        reply = {
-                "fulfillmentText" : latestNews
-                }
-        return jsonify(reply)
-    if(action == "Dictionary"):
-        wordMeaning = DictionaryInformation(inputValue)
-        reply = {
-                "fulfillmentText" : wordMeaning
-                }
-        return jsonify(reply)
-    if(action == "hindunews"):
-        latestNews = HinduNews()
-        #latestNews = "Test"
-        reply = {
-                "fulfillmentText" : latestNews
-                }
-        return jsonify(reply)    
 
 @app.route('/GetAllLineStatusGet')
 def GetAllLineStatusGet():
