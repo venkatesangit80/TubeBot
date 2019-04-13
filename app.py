@@ -35,7 +35,7 @@ def GetAllLineStatus():
                     response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription']
         
                     if "Part" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" & ","-").replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                         subResp = requests.get(statusUrl)
                         for sub_todo_item in subResp.json():
                             response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
@@ -43,7 +43,7 @@ def GetAllLineStatus():
                                 response_text = response_text + singleAffected['commonName'] + ","
                 
                     if "Closed" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" & ","-").replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                         subResp = requests.get(statusUrl)
                         for sub_todo_item in subResp.json():
                             response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
@@ -51,7 +51,7 @@ def GetAllLineStatus():
                                 response_text = response_text + singleAffected['commonName'] + ","        
                 
                     if "Minor" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" & ","-").replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                         subResp = requests.get(statusUrl)
                         for sub_todo_item in subResp.json():
                             response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
@@ -60,7 +60,7 @@ def GetAllLineStatus():
         
                 
                     if "Severe" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" & ","-").replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                         subResp = requests.get(statusUrl)
                         for sub_todo_item in subResp.json():
                             response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
@@ -68,7 +68,7 @@ def GetAllLineStatus():
                                 response_text = response_text + singleAffected['commonName'] + ","   
         
                     if "Reduced" in todo_item['lineStatuses'][0]['statusSeverityDescription']:
-                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
+                        statusUrl = "https://api.tfl.gov.uk/Line/" + todo_item['name'].replace(" & ","-").replace(" ", "-") + "/Status?detail=true&app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba"
                         subResp = requests.get(statusUrl)
                         for sub_todo_item in subResp.json():
                             response_text = response_text + " --- " + sub_todo_item['lineStatuses'][0]['reason'] + " ---- FOR ---- "
