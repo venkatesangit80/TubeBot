@@ -383,7 +383,17 @@ def HinduNews():
     newsTitles = ""
     for singleNews in newsFeedResponse.json()['articles']:
         newsTitles = newsTitles + str(singleNews['title']) + " >>>>> "
-    return newsTitles    
+    return newsTitles   
+
+@app.route('/PostCode/<postCodeNumber>')
+def PostalCode(postCodeNumber):
+    postURL = "https://api.postcodes.io/postcodes/" + postCodeNumber
+    postUrlResponse = requests.get(postURL)
+    postValue = ""
+    for singlePost in postUrlResponse.json()['result']:
+        postValue = postValue + singlePost + " "
+    return postValue
+ 
 
 if __name__ == "__main__":
     app.run()
