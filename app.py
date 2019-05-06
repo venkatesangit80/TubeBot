@@ -24,14 +24,6 @@ def LineStatus(LineName):
         if todo_item['name'].upper() == LineName.upper():
             response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription']
     return response_text
-@app.route('/AllLineStatus')
-def GetAllLineStatus():
-    resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
-    response_text = ""
-    for todo_item in resp.json():
-        if 'GOOD' not in todo_item['lineStatuses'][0]['statusSeverityDescription'].upper():
-            response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription']
-    return response_text
 @app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
     try:
