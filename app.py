@@ -9,6 +9,7 @@ Created on Tue Mar 12 22:29:59 2019
 from flask import Flask, jsonify, request
 import requests
 import datetime
+import json
 app = Flask(__name__)
 
 @app.route('/')
@@ -32,6 +33,15 @@ def AllLineStatus():
     response_text = str(now) + " "
     for todo_item in resp.json():
         response_text = response_text + " " + todo_item['name'] + " " + todo_item['lineStatuses'][0]['statusSeverityDescription'] + " --- "
+    return response_text
+@app.route('/AllLineStatusPretty')
+def AllLineStatusPretty():
+    resp = requests.get('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status?app_id=bd38b189&app_key=307678e9c079a6c525da5304098522ba')
+    allLinesDict = {}
+    response_text = ""
+    for todo_item in resp.json():
+        allLinesDict.update({todo_item['name']: todo_item['lineStatuses'][0]['statusSeverityDescription']})
+    response_text = json.dumps(allLinesDict)
     return response_text
 @app.route('/GetAllLineStatus', methods = ['POST'])
 def GetAllLineStatus():
